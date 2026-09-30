@@ -18,3 +18,7 @@ cross-covariance-denoising/
 2025_Celegans/comparison/sim_fidelity*/
 paper_report/fig/out/
 zenodo/MANIFEST.tsv
+examples/output/
+
+# ...but the shipped example ROI is tracked
+!examples/sim_roi_AD_05.mat

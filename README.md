@@ -30,15 +30,33 @@ pip install CRIkit2==0.4.4          # provides `crikit` (unmodified release)
 `environment/image-proc.yml` is only needed to go from raw HDF5 to VST cubes (step 1).
 
 
-## Run the pipeline on your own data
+## Example: 64x64 simulated ROI
+
+`examples/sim_roi_AD_05.mat` (19 MB) is a crop of a simulated cube that carries its exact ground truth, so denoising can be scored. Run the
+released pipeline on it:
+
+```bash
+conda run -n crikit3 python bcars_processing/step2_process.py --config examples/params_example.yaml
+
+`examples/example.ipynb` demonstrates the results.
 
 ```
-bash bcars_processing/run_pipeline.sh params.yaml
+step1_preprocess.py   raw .h5  → dark/illumination correction, spectral alignment, VST,
+                                 spectral clip, Whittaker detrend, normalization  → .mat
+                                 [image-proc env]
+step2_process.py      .mat     → CCV (tau) → phase retrieval + PEC → Raman .tif
+                                 [crikit3 env]
 ```
-Edit `params.yaml` first: paths, wavenumber calibration for your acquisition date, Whittaker
-smoothness, CCV `tau`, and the phase-retrieval and PEC settings. Step 1 writes
-`img_clean` / `y_0_real` / `norm_min` / `norm_max` / `wn` `.mat` cubes; step 2 turns those
-into Raman `.tif` stacks.
+
+Run either on its own:
+
+```bash
+conda run -n crikit3    python bcars_processing/step2_process.py    --config params.yaml
+conda run -n image-proc python bcars_processing/step1_preprocess.py --config params.yaml
+```
+`run_pipeline.sh` is a convenience wrapper that runs both in their respective conda
+environments; it needs raw `.h5` input.
+
 
 ## Benchmarked denoisers
 

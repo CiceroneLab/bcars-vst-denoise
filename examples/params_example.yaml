@@ -1,0 +1,46 @@
+# ============================================================
+# Example config: the 64x64 simulated ROI shipped in this folder.
+#
+#   conda run -n crikit3 python bcars_processing/step2_process.py \
+#       --config examples/params_example.yaml
+#
+# Step 1 (raw .h5 -> VST -> .mat) is skipped: the ROI is already a
+# post-VST, detrended, normalized cube. See the repository README.
+# ============================================================
+
+paths:
+  mat_dir:    ./examples             # step 2 input  (.mat)
+  output_dir: ./examples/output      # step 2 output (Raman .tif + wn.txt)
+
+# ── CCV-SVD denoising ────────────────────────────────────────
+ccvsvd:
+  tau:    0.5        # split-half correlation threshold; keeps 2 components on this ROI
+  recon:  symmetric
+  smooth: 0.0
+
+# ── Phase retrieval + error correction ───────────────────────
+# The simulated cubes were retrieved with Kramers-Kronig, not the Hilbert
+# transform used for experimental data — these are the settings behind the
+# deposited simulated Raman cubes.
+postprocess:
+  phase_method: kk
+  kk:
+    cars_amp_offset: 1.0
+    nrb_amp_offset:  1.0
+    phase_offset:    0.0
+    conjugate:       false
+    norm_to_nrb:     true
+    pad_factor:      1
+    n_edge:          30
+    bad_value:       1.0e-8
+  pec:
+    enabled:           true
+    smoothness_param:  1
+    asym_param:        1.0e-5
+    redux:             5
+    order:             2
+    max_iter:          100
+    min_diff:          1.0e-6
+    verbose:           false
+  sec:
+    enabled: false
