@@ -16,8 +16,8 @@ The benchmarked deep denoisers live in their own repositories, linked below.
 |---|---|
 | [CiceroneLab/bcars-vst-denoise](https://github.com/CiceroneLab/bcars-vst-denoise) | **this repository** — VST, detrending, CCV, phase retrieval, all paper metrics |
 | [CiceroneLab/BCARS_N2N](https://github.com/CiceroneLab/BCARS_N2N) | Noise2Noise baseline (CSBDeep/CARE) |
-| [CiceroneLab/BCARS_S2DIP](https://github.com/CiceroneLab/S2DIP) | deep image prior baseline (fork) |
-| [CiceroneLab/BCARS_DDS2M](https://github.com/CiceroneLab/DDS2M) | diffusion baseline (fork) |
+| [CiceroneLab/BCARS_S2DIP](https://github.com/CiceroneLab/BCARS_S2DIP) | deep image prior baseline (fork) |
+| [CiceroneLab/BCARS_DDS2M](https://github.com/CiceroneLab/BCARS_DDS2M) | diffusion baseline (fork) |
 | [Zenodo 10.5281/zenodo.22968813](https://doi.org/10.5281/zenodo.22968813) | data: Raman cubes, input cubes |
 
 
